@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Рулетка подарков</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
   <style>
     body {
@@ -108,7 +109,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
+      z-index: 9999;
       flex-direction: column;
     }
 
@@ -133,6 +134,8 @@
     .swipe-roulette-container {
       margin-top: 30px;
       text-align: center;
+      position: relative;
+      z-index: 0;
     }
 
     .swipe-roulette {
@@ -149,7 +152,6 @@
     .swipe-gifts-wrapper {
       display: flex;
       height: 100%;
-      transition: transform 0.3s ease;
       will-change: transform;
     }
 
@@ -229,13 +231,13 @@
       if (gift.startsWith("http") || gift.endsWith(".png") || gift.endsWith(".jpg")) {
         img.src = gift;
       } else {
-        img.src = "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png"; // смайлик 😢
+        img.src = "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png";
       }
       div.appendChild(img);
       giftsTrack.appendChild(div);
     });
 
-    fullGifts.forEach(gift => {
+    gifts.forEach(gift => {
       const div = document.createElement("div");
       div.className = "swipe-gift";
       const img = document.createElement("img");
@@ -289,36 +291,18 @@
       spinning = false;
     });
 
-    // Свайп на мобильных
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
-    let swipeOffset = 0;
+    // GSAP Draggable для swipe-roulette
+    gsap.registerPlugin(Draggable);
 
-    const maxOffset = -(swipeGiftsTrack.scrollWidth - swipeGiftsTrack.parentElement.offsetWidth);
+    const container = document.querySelector(".swipe-roulette");
+    const maxX = -(swipeGiftsTrack.scrollWidth - container.clientWidth);
 
-    swipeGiftsTrack.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-      isDragging = true;
-    });
-
-    swipeGiftsTrack.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
-      currentX = e.touches[0].clientX;
-      let delta = currentX - startX;
-      let newOffset = swipeOffset + delta;
-
-      if (newOffset > 0) newOffset = 0;
-      if (newOffset < maxOffset) newOffset = maxOffset;
-
-      swipeGiftsTrack.style.transform = `translateX(${newOffset}px)`;
-    });
-
-    swipeGiftsTrack.addEventListener("touchend", () => {
-      swipeOffset += currentX - startX;
-      if (swipeOffset > 0) swipeOffset = 0;
-      if (swipeOffset < maxOffset) swipeOffset = maxOffset;
-      isDragging = false;
+    Draggable.create(swipeGiftsTrack, {
+      type: "x",
+      bounds: { minX: maxX, maxX: 0 },
+      inertia: true,
+      edgeResistance: 0.8,
+      zIndexBoost: false
     });
   </script>
 </body>
