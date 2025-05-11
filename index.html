@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -14,133 +15,134 @@
       font-family: Arial, sans-serif;
       text-align: center;
     }
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
 
-    .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
-    }
+.news-banner {
+  height: 40px;
+  width: 100%;
+  background: linear-gradient(to right, #80d5ff, #77c6ffa2);
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
 
-    .news-banner {
-      height: 40px;
-      width: 100%;
-      background: linear-gradient(to right, #80d5ff, #77c6ffa2);
-      color: #ffffff;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+.reel {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  margin-bottom: 25px;
+}
 
-    .reel {
-      position: relative;
-      width: 100%;
-      height: 130px;
-      overflow: hidden;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(6px);
-      margin-bottom: 25px;
-    }
+.gifts-wrapper {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: 0;
+  will-change: transform;
+}
 
-    .gifts-wrapper {
-      display: flex;
-      height: 100%;
-      align-items: center;
-      padding: 0;
-      will-change: transform;
-    }
+.gift {
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0 10px;
+}
 
-    .gift {
-      width: 100px;
-      height: 100px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-shrink: 0;
-      margin: 0 10px;
-    }
+.gift img {
+  max-width: 90px;
+  max-height: 90px;
+}
 
-    .gift canvas, .gift span {
-      max-width: 80px;
-      max-height: 80px;
-    }
+.pointer-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: rgba(0, 200, 255, 0.5);
+  transform: translateX(-50%);
+  z-index: 10;
+}
 
-    .pointer-line {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 4px;
-      height: 100%;
-      background: rgba(0, 200, 255, 0.5);
-      transform: translateX(-50%);
-      z-index: 10;
-    }
+button {
+  background-color: #2ea1f8;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-    button {
-      background-color: #2ea1f8;
-      border: none;
-      color: white;
-      padding: 12px 24px;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+button:hover {
+  background-color: #1e81ce;
+}
 
-    button:hover {
-      background-color: #1e81ce;
-    }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  flex-direction: column;
+}
 
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      flex-direction: column;
-    }
+.modal-animation {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 20px;
+}
 
-    .modal-animation {
-      width: 180px;
-      height: 180px;
-      margin-bottom: 20px;
-    }
+.modal h2 {
+  font-size: 24px;
+  color: #00ffcc;
+  margin: 0;
+}
 
-    .modal h2 {
-      font-size: 24px;
-      color: #00ffcc;
-      margin: 0;
-    }
+.modal button {
+  font-size: 16px;
+  margin-top: 30px;
+  padding: 10px 26px;
+}
 
-    .modal button {
-      font-size: 16px;
-      margin-top: 30px;
-      padding: 10px 26px;
-    }
+
   </style>
 </head>
 <body>
   <div class="container">
     <div class="news-banner" onclick="window.location.href='https://your-link.com'">Check our news!</div>
+<div class="reel" id="reel">
+  <div class="pointer-line"></div>
+  <div class="gifts-wrapper" id="giftsTrack"></div>
+</div>
 
-    <div class="reel" id="reel">
-      <div class="pointer-line"></div>
-      <div class="gifts-wrapper" id="giftsTrack"></div>
-    </div>
+<button id="spinButton">Испытать удачу</button>
 
-    <button id="spinButton">Испытать удачу</button>
   </div>
 
   <div class="modal" id="modal">
@@ -155,16 +157,36 @@
 
     const gifts = [];
 
-    // Приз (выигрышный)
-    const prize = { type: "lottie", content: "https://assets7.lottiefiles.com/packages/lf20_hbr24n0j.json" };
+    // Выигрышный смайлик
+    const prize = { type: "emoji", content: "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png", width: 10, height: 10 };
+
+    // Добавим приз первым
     gifts.push(prize);
 
-    // 11 фейков
-    for (let i = 0; i < 11; i++) {
-      gifts.push({ type: "lottie", content: "https://assets1.lottiefiles.com/packages/lf20_touohxv0.json" });
-    }
+    // Фейковые подарки (уникальные картинки)
+const fakeGiftImages = [
+"photo_3_2025-05-11_15-33-26-removebg-preview (1).png",
+"photo_2_2025-05-11_15-33-26-removebg-preview (1).png",
+"photo_8_2025-05-11_15-05-02-removebg-preview.png",
+"photo_4_2025-05-11_15-33-26-removebg-preview (1).png",
+"img/gift5.jpg",
+"img/gift6.jpg",
+"free-icon-verify-9918694.png",
+"img/gift8.jpg",
+"img/gift9.jpg",
+"free-icon-verify-9918694.png",
+"free-icon-verify-9918694.png",
+];
 
-    // Дублируем массив несколько раз для бесконечной ленты
+fakeGiftImages.forEach(img => {
+gifts.push({
+  type: "emoji",
+  content: img
+});
+});
+
+
+    // Удлиняем ленту
     let fullGifts = [];
     for (let i = 0; i < 10; i++) {
       fullGifts = fullGifts.concat(gifts);
@@ -181,55 +203,47 @@
     fullGifts.forEach((gift) => {
       const div = document.createElement("div");
       div.className = "gift";
-
-      const animContainer = document.createElement("div");
-      animContainer.style.width = "80px";
-      animContainer.style.height = "80px";
-      div.appendChild(animContainer);
-
-      lottie.loadAnimation({
-        container: animContainer,
-        renderer: "svg",
-        loop: true,
-        autoplay: true,
-        path: gift.content
-      });
-
+      const img = document.createElement("img");
+      img.src = gift.content;
+      div.appendChild(img);
       giftsTrack.appendChild(div);
     });
 
     spinButton.addEventListener("click", () => {
-      if (spinning) return;
-      spinning = true;
-
-      const reel = document.getElementById("reel");
-      const centerOffset = reel.offsetWidth / 2 - giftWidth / 2;
-
-      // Выбираем случайный приз внутри массива
-      const prizeIndexes = fullGifts
-        .map((g, i) => (g.content === prize.content ? i : -1))
-        .filter(i => i !== -1);
-
-      const chosenIndex = prizeIndexes[Math.floor(Math.random() * prizeIndexes.length)];
-      const finalOffset = chosenIndex * giftWidth - centerOffset;
-
-      gsap.to(giftsTrack, {
-        x: -finalOffset,
-        duration: 4,
-        ease: "power3.inOut",
-        onComplete: () => {
-          modal.style.display = "flex";
-          modalLottie.innerHTML = "";
-          lottie.loadAnimation({
-            container: modalLottie,
-            renderer: "svg",
-            loop: true,
-            autoplay: true,
-            path: prize.content
-          });
-        }
+        if (spinning) return;
+        spinning = true;
+      
+        const reel = document.getElementById("reel");
+        const centerOffset = reel.offsetWidth / 2 - giftWidth / 2;
+      
+        const prizeIndexes = fullGifts
+          .map((g, i) => (g.content === prize.content ? i : -1))
+          .filter(i => i !== -1);
+      
+        // Берем "поздний" индекс в пределах массива
+        const loopCount = 5; // Примерно 4 круга до остановки
+        const chosenIndex = prizeIndexes[0] + loopCount * gifts.length;
+      
+        const finalOffset = chosenIndex * giftWidth - centerOffset;
+      
+        gsap.to(giftsTrack, {
+          x: -finalOffset,
+          duration: 6,
+          ease: "power3.inOut",
+          onComplete: () => {
+            modal.style.display = "flex";
+            modalLottie.innerHTML = "";
+            lottie.loadAnimation({
+              container: modalLottie,
+              renderer: "svg",
+              loop: true,
+              autoplay: true,
+              path: prize.content
+            });
+          }
+        });
       });
-    });
+      
 
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
@@ -237,5 +251,7 @@
       spinning = false;
     });
   </script>
+
 </body>
-</html>
+</html> 
+
