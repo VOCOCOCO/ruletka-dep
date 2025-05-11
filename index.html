@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -15,134 +14,184 @@
       font-family: Arial, sans-serif;
       text-align: center;
     }
-.container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-}
 
-.news-banner {
-  height: 40px;
-  width: 100%;
-  background: linear-gradient(to right, #80d5ff, #77c6ffa2);
-  color: #ffffff;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
 
-.reel {
-  position: relative;
-  width: 100%;
-  height: 130px;
-  overflow: hidden;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(6px);
-  margin-bottom: 25px;
-}
+    .news-banner {
+      height: 50px;
+      width: 100%;
+      background: linear-gradient(to right, #80d5ff, #35bbeb, #80d5ff);
+      color: #ffffff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
 
-.gifts-wrapper {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  padding: 0;
-  will-change: transform;
-}
+    .reel {
+      position: relative;
+      width: 100%;
+      height: 130px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(6px);
+      margin-bottom: 25px;
+    }
 
-.gift {
-  width: 100px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  margin: 0 10px;
-}
+    .gifts-wrapper {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      padding: 0;
+      will-change: transform;
+    }
 
-.gift img {
-  max-width: 90px;
-  max-height: 90px;
-}
+    .gift {
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      margin: 0 10px;
+    }
 
-.pointer-line {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 4px;
-  height: 100%;
-  background: rgba(0, 200, 255, 0.5);
-  transform: translateX(-50%);
-  z-index: 10;
-}
+    .gift img {
+      max-width: 90px;
+      max-height: 90px;
+    }
 
-button {
-  background-color: #2ea1f8;
-  border: none;
-  color: white;
-  padding: 12px 24px;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+    .pointer-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: rgba(0, 200, 255, 0.5);
+      transform: translateX(-50%);
+      z-index: 10;
+    }
 
-button:hover {
-  background-color: #1e81ce;
-}
+    button {
+      background-color: #2ea1f8;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  flex-direction: column;
-}
+    button:hover {
+      background-color: #1e81ce;
+    }
 
-.modal-animation {
-  width: 180px;
-  height: 180px;
-  margin-bottom: 20px;
-}
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.61);
+      backdrop-filter: blur(20px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      flex-direction: column;
+    }
 
-.modal h2 {
-  font-size: 24px;
-  color: #00ffcc;
-  margin: 0;
-}
+    .modal-animation {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 20px;
+    }
 
-.modal button {
-  font-size: 16px;
-  margin-top: 30px;
-  padding: 10px 26px;
-}
+    .modal h2 {
+      font-size: 24px;
+      color: #00ffcc;
+      margin: 0;
+    }
 
+    .modal button {
+      font-size: 16px;
+      margin-top: 30px;
+      padding: 10px 26px;
+    }
 
+    .swipe-roulette-container {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .swipe-roulette {
+      position: relative;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      width: 100%;
+      height: 80px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .swipe-gifts-wrapper {
+      display: flex;
+      height: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    .swipe-gift {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swipe-gift img {
+      max-width: 60px;
+      max-height: 60px;
+    }
+
+    .swipe-text {
+      color: #80d5ff;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="news-banner" onclick="window.location.href='https://your-link.com'">Check our news!</div>
-<div class="reel" id="reel">
-  <div class="pointer-line"></div>
-  <div class="gifts-wrapper" id="giftsTrack"></div>
-</div>
 
-<button id="spinButton">Испытать удачу</button>
+    <div class="reel" id="reel">
+      <div class="pointer-line"></div>
+      <div class="gifts-wrapper" id="giftsTrack"></div>
+    </div>
 
+    <button id="spinButton">Испытать удачу</button>
+
+    <div class="swipe-roulette-container">
+      <div class="swipe-text">What can I drop?</div>
+      <div class="swipe-roulette">
+        <div class="swipe-gifts-wrapper" id="swipeGiftsTrack"></div>
+      </div>
+    </div>
   </div>
 
   <div class="modal" id="modal">
@@ -153,97 +202,84 @@ button:hover {
 
   <script>
     const giftWidth = 120;
-    const visibleItems = 5;
-
-    const gifts = [];
-
-    // Выигрышный смайлик
-    const prize = { type: "emoji", content: "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png", width: 10, height: 10 };
-
-    // Добавим приз первым
-    gifts.push(prize);
-
-    // Фейковые подарки (уникальные картинки)
-const fakeGiftImages = [
-"photo_3_2025-05-11_15-33-26-removebg-preview (1).png",
-"photo_2_2025-05-11_15-33-26-removebg-preview (1).png",
-"photo_8_2025-05-11_15-05-02-removebg-preview.png",
-"photo_4_2025-05-11_15-33-26-removebg-preview (1).png",
-"img/gift5.jpg",
-"img/gift6.jpg",
-"free-icon-verify-9918694.png",
-"img/gift8.jpg",
-"img/gift9.jpg",
-"free-icon-verify-9918694.png",
-"free-icon-verify-9918694.png",
-];
-
-fakeGiftImages.forEach(img => {
-gifts.push({
-  type: "emoji",
-  content: img
-});
-});
-
-
-    // Удлиняем ленту
-    let fullGifts = [];
-    for (let i = 0; i < 10; i++) {
-      fullGifts = fullGifts.concat(gifts);
-    }
+    const gifts = [
+      "photo_1.png", "photo_2.png", "photo_3.png", "photo_4.png",
+      "photo_5.png", "https://em-content.zobj.net/thumbs/240/apple/354/cherry-blossom_1f338.png",
+      "😢", "img/gift8.jpg", "img/gift9.jpg", "free-icon-verify-9918694.png"
+    ];
 
     const giftsTrack = document.getElementById("giftsTrack");
+    const swipeGiftsTrack = document.getElementById("swipeGiftsTrack");
     const spinButton = document.getElementById("spinButton");
     const modal = document.getElementById("modal");
     const modalLottie = document.getElementById("modalLottie");
     const closeModal = document.getElementById("closeModal");
 
-    let spinning = false;
+    const fullGifts = [];
+    for (let i = 0; i < 10; i++) {
+      fullGifts.push(...gifts);
+    }
 
-    fullGifts.forEach((gift) => {
+    fullGifts.forEach(gift => {
       const div = document.createElement("div");
       div.className = "gift";
       const img = document.createElement("img");
-      img.src = gift.content;
+      if (gift.startsWith("http") || gift.endsWith(".png") || gift.endsWith(".jpg")) {
+        img.src = gift;
+      } else {
+        img.src = "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png"; // смайлик 😢
+      }
       div.appendChild(img);
       giftsTrack.appendChild(div);
     });
 
+    fullGifts.forEach(gift => {
+      const div = document.createElement("div");
+      div.className = "swipe-gift";
+      const img = document.createElement("img");
+      if (gift.startsWith("http") || gift.endsWith(".png") || gift.endsWith(".jpg")) {
+        img.src = gift;
+      } else {
+        img.src = "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png";
+      }
+      div.appendChild(img);
+      swipeGiftsTrack.appendChild(div);
+    });
+
+    let spinning = false;
+
     spinButton.addEventListener("click", () => {
-        if (spinning) return;
-        spinning = true;
-      
-        const reel = document.getElementById("reel");
-        const centerOffset = reel.offsetWidth / 2 - giftWidth / 2;
-      
-        const prizeIndexes = fullGifts
-          .map((g, i) => (g.content === prize.content ? i : -1))
-          .filter(i => i !== -1);
-      
-        // Берем "поздний" индекс в пределах массива
-        const loopCount = 5; // Примерно 4 круга до остановки
-        const chosenIndex = prizeIndexes[0] + loopCount * gifts.length;
-      
-        const finalOffset = chosenIndex * giftWidth - centerOffset;
-      
-        gsap.to(giftsTrack, {
-          x: -finalOffset,
-          duration: 6,
-          ease: "power3.inOut",
-          onComplete: () => {
-            modal.style.display = "flex";
-            modalLottie.innerHTML = "";
-            lottie.loadAnimation({
-              container: modalLottie,
-              renderer: "svg",
-              loop: true,
-              autoplay: true,
-              path: prize.content
-            });
-          }
-        });
+      if (spinning) return;
+      spinning = true;
+
+      const prize = "😢";
+      const prizeIndexes = fullGifts
+        .map((g, i) => (g === prize ? i : -1))
+        .filter(i => i !== -1);
+
+      const loopCount = 5;
+      const chosenIndex = prizeIndexes[0] + loopCount * gifts.length;
+
+      const centerOffset = document.getElementById("reel").offsetWidth / 2 - giftWidth / 2;
+      const finalOffset = chosenIndex * giftWidth - centerOffset;
+
+      gsap.to(giftsTrack, {
+        x: -finalOffset,
+        duration: 6,
+        ease: "power5.inOut",
+        onComplete: () => {
+          modal.style.display = "flex";
+          modalLottie.innerHTML = "";
+          lottie.loadAnimation({
+            container: modalLottie,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "https://lottie.host/2e7b308e-92b6-495c-a96b-cf93e02eb7b4/BiwZQ7vQaf.json"
+          });
+        }
       });
-      
+    });
 
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
@@ -251,7 +287,5 @@ gifts.push({
       spinning = false;
     });
   </script>
-
 </body>
-</html> 
-
+</html>
