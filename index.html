@@ -24,7 +24,7 @@
     .news-banner {
       height: 50px;
       width: 100%;
-      background: linear-gradient(to right, #80d5ff, #35bbeb, #80d5ff);
+      background: linear-gradient(to right, #80d5ff, #ffffff, #80d5ff);
       color: #ffffff;
       font-weight: bold;
       display: flex;
@@ -150,6 +150,7 @@
       display: flex;
       height: 100%;
       transition: transform 0.3s ease;
+      will-change: transform;
     }
 
     .swipe-gift {
@@ -161,6 +162,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-shrink: 0;
     }
 
     .swipe-gift img {
@@ -286,6 +288,39 @@
       gsap.set(giftsTrack, { x: 0 });
       spinning = false;
     });
+
+    // Свайп на мобильных
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let swipeOffset = 0;
+
+    const maxOffset = -(swipeGiftsTrack.scrollWidth - swipeGiftsTrack.parentElement.offsetWidth);
+
+    swipeGiftsTrack.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+
+    swipeGiftsTrack.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+      let delta = currentX - startX;
+      let newOffset = swipeOffset + delta;
+
+      if (newOffset > 0) newOffset = 0;
+      if (newOffset < maxOffset) newOffset = maxOffset;
+
+      swipeGiftsTrack.style.transform = `translateX(${newOffset}px)`;
+    });
+
+    swipeGiftsTrack.addEventListener("touchend", () => {
+      swipeOffset += currentX - startX;
+      if (swipeOffset > 0) swipeOffset = 0;
+      if (swipeOffset < maxOffset) swipeOffset = maxOffset;
+      isDragging = false;
+    });
   </script>
 </body>
 </html>
+
