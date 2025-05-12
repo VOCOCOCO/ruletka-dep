@@ -9,18 +9,22 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
   <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
       background: #0d1117;
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
+      height: 100vh;
+      overflow-y: auto; /* Включаем вертикальный скролл */
     }
+
     .container {
       max-width: 600px;
       margin: auto;
       padding: 20px;
     }
+
     .news-banner {
       height: 50px;
       width: 100%;
@@ -34,6 +38,7 @@
       cursor: pointer;
       margin-bottom: 20px;
     }
+
     .reel {
       position: relative;
       width: 100%;
@@ -44,12 +49,14 @@
       backdrop-filter: blur(6px);
       margin-bottom: 25px;
     }
+
     .gifts-wrapper {
       display: flex;
       height: 100%;
       align-items: center;
       will-change: transform;
     }
+
     .gift {
       width: 100px;
       height: 100px;
@@ -61,10 +68,12 @@
       flex-shrink: 0;
       margin: 0 10px;
     }
+
     .gift img {
       max-width: 90px;
       max-height: 90px;
     }
+
     .pointer-line {
       position: absolute;
       top: 0; left: 50%;
@@ -73,20 +82,23 @@
       transform: translateX(-50%);
       z-index: 10;
     }
+
     button {
-        background-color: #2ea1f8;
-        border: none;
-        color: white;
-        padding: 12px 24px;
-        font-size: 19px;
-        font-weight: bold; /* Жирный текст */
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        width: 99%; /* Задаём ширину 100% от родительского контейнера */
-        box-sizing: border-box; /* Учитываем паддинги в общей ширине */
-      } 
+      background-color: #2ea1f8;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 99%;
+      box-sizing: border-box;
+    }
+
     button:hover { background-color: #1e81ce; }
+
     .modal {
       position: fixed; top: 0; left: 0;
       width: 100vw; height: 100vh;
@@ -98,36 +110,62 @@
       z-index: 9999;
       flex-direction: column;
     }
+
     .modal-image {
-        max-width: 90%; /* Ограничиваем максимальную ширину */
-        max-height: 60%; /* Ограничиваем максимальную высоту */
-        object-fit: contain; /* Сохраняем пропорции */
-        margin-top: -20px; /* Чуть выше центра */
-        margin-bottom: 15px;
-      }            
-    .modal h2 { font-size: 24px; color: #00ffcc; margin: 0; }
-    .modal button { font-size: 16px; margin-top: 30px; padding: 10px 26px; }
-    /* Embla Carousel */
-    .swipe-roulette-container { margin-top: 30px; text-align: center; }
+      max-width: 90%;
+      max-height: 60%;
+      object-fit: contain;
+      margin-top: -20px;
+      margin-bottom: 15px;
+    }
+
+    .modal h2 {
+      font-size: 24px;
+      color: #00ffcc;
+      margin: 0;
+    }
+
+    .modal button {
+      font-size: 16px;
+      margin-top: 30px;
+      padding: 10px 26px;
+      width: 90%; /* Ширина кнопки в модалке 90% */
+      box-sizing: border-box;
+    }
+
+    .swipe-roulette-container {
+      margin-top: 30px;
+      text-align: center;
+    }
+
     .swipe-text {
-        color: #ffffff;
-        font-size: 17px;
-        margin-bottom: 10px;
-        text-align: left;
-        padding-left: 10px;
-        font-weight: bold;
-      }      
+      color: #ffffff;
+      font-size: 17px;
+      margin-bottom: 10px;
+      text-align: left;
+      padding-left: 10px;
+      font-weight: bold;
+    }
+
     .embla { overflow: hidden; width: 100%; }
+
     .embla__container { display: flex; }
+
     .embla__slide {
       flex: 0 0 auto;
       width: 70px; height: 70px;
       margin-right: 10px;
       background: rgba(255,255,255,0.08);
       border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .embla__slide img { max-width: 60px; max-height: 60px; }
+
+    .embla__slide img {
+      max-width: 60px;
+      max-height: 60px;
+    }
   </style>
 </head>
 <body>
@@ -154,21 +192,18 @@
     <h2>Try your luck next time 🍀</h2>
     <button id="closeModal">Закрыть</button>
   </div>
-   
 
   <script>
     const modalImage = document.getElementById("modalImage");
-modalImage.src = "nothing_drop.png"; // Вставь свою ссылку
-modalImage.style.display = "block";
+    modalImage.src = "nothing_drop.png";
+    modalImage.style.display = "block";
 
-    // Данные подарков
     const gifts = [
       "1CHzB4K5FantEZu.png","680e5d8f8bf66.png","toTNAm2yurDAiqK.png","U8z9ivaScNyJ86V.png",
       "Oj0IhQW5D5QyVFf.png","PQM9MVSTAF7sQ12.png",
       "nothing_drop.png","pudbsohqxfD98gc.png","bvK9PmcyFgAh4gP.png","q2c0eUx5k8krA97.png"
     ];
 
-    // Рендер основной рулетки
     const giftsTrack = document.getElementById("giftsTrack");
     const fullGifts = [];
     for (let i = 0; i < 10; i++) fullGifts.push(...gifts);
@@ -181,7 +216,6 @@ modalImage.style.display = "block";
       giftsTrack.appendChild(div);
     });
 
-    // Спин
     let spinning = false;
     document.getElementById("spinButton").onclick = () => {
       if (spinning) return; spinning = true;
@@ -203,13 +237,13 @@ modalImage.style.display = "block";
         }
       });
     };
+
     document.getElementById("closeModal").onclick = () => {
       document.getElementById("modal").style.display="none";
       gsap.set(giftsTrack,{x:0});
       spinning=false;
     };
 
-    // Рендер Embla
     const emblaTrack = document.getElementById("emblaTrack");
     gifts.forEach(g => {
       const slide = document.createElement("div");
@@ -224,7 +258,6 @@ modalImage.style.display = "block";
       emblaTrack.appendChild(slide);
     });
 
-    // Инициализация Embla
     EmblaCarousel(document.getElementById("embla"), {
       loop: false,
       align: "start",
