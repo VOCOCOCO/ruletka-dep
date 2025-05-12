@@ -8,6 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
   <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -16,7 +17,8 @@
       font-family: Arial, sans-serif;
       text-align: center;
       height: 100vh;
-      overflow-y: auto; /* Включаем вертикальный скролл */
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
     }
 
     .container {
@@ -129,7 +131,7 @@
       font-size: 16px;
       margin-top: 30px;
       padding: 10px 26px;
-      width: 90%; /* Ширина кнопки в модалке 90% */
+      width: 90%;
       box-sizing: border-box;
     }
 
@@ -171,13 +173,11 @@
 <body>
   <div class="container">
     <div class="news-banner" onclick="window.location.href='https://your-link.com'">Check our news!</div>
-
     <div class="reel" id="reel">
       <div class="pointer-line"></div>
       <div class="gifts-wrapper" id="giftsTrack"></div>
     </div>
-    <button id="spinButton">Try your luck</button>
-
+    <button id="spinButton">Try your luck (35 ⭐)</button>
     <div class="swipe-roulette-container">
       <div class="swipe-text">What can I drop?</div>
       <div class="embla" id="embla">
@@ -185,14 +185,12 @@
       </div>
     </div>
   </div>
-
   <div class="modal" id="modal">
     <img id="modalImage" class="modal-image" src="" alt="Prize image" style="display: none;">
     <div class="modal-animation" id="modalLottie"></div>
     <h2>Try your luck next time 🍀</h2>
     <button id="closeModal">Закрыть</button>
   </div>
-
   <script>
     const modalImage = document.getElementById("modalImage");
     modalImage.src = "nothing_drop.png";
@@ -210,33 +208,39 @@
     fullGifts.forEach(g => {
       const div = document.createElement("div"), img = document.createElement("img");
       div.className = "gift";
-      img.src = (g.endsWith(".png")||g.endsWith(".jpg")||g.startsWith("http")) ? g
-             : "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png";
+      img.src = g;
       div.appendChild(img);
       giftsTrack.appendChild(div);
     });
 
     let spinning = false;
     document.getElementById("spinButton").onclick = () => {
-      if (spinning) return; spinning = true;
-      const prize = "nothing_drop.png";
-      const idx = fullGifts.map((v,i)=>v===prize?i:-1).filter(i=>i!==-1)[0] + 5*gifts.length;
-      const offset = idx*120 - (document.getElementById("reel").offsetWidth/2 - 60);
-      gsap.to(giftsTrack, {
-        x: -offset,
-        duration: 6,
-        ease: "power5.inOut",
-        onComplete(){
-          document.getElementById("modal").style.display="flex";
-          document.getElementById("modalLottie").innerHTML="";
-          lottie.loadAnimation({
-            container:document.getElementById("modalLottie"),
-            renderer:"svg",loop:true,autoplay:true,
-            path:"https://lottie.host/2e7b308e-92b6-495c-a96b-cf93e02eb7b4/BiwZQ7vQaf.json"
-          });
-        }
-      });
+      if (spinning) return;
+      Telegram.WebApp.openInvoice("https://t.me/$xxtNG6rZ-UjCDgAA8lgFbgivGRk");
     };
+
+    Telegram.WebApp.onEvent("invoiceClosed", function(event) {
+      if (event.status === "paid") {
+        spinning = true;
+        const prize = "nothing_drop.png";
+        const idx = fullGifts.map((v,i)=>v===prize?i:-1).filter(i=>i!==-1)[0] + 5*gifts.length;
+        const offset = idx*120 - (document.getElementById("reel").offsetWidth/2 - 60);
+        gsap.to(giftsTrack, {
+          x: -offset,
+          duration: 6,
+          ease: "power5.inOut",
+          onComplete(){
+            document.getElementById("modal").style.display="flex";
+            document.getElementById("modalLottie").innerHTML="";
+            lottie.loadAnimation({
+              container:document.getElementById("modalLottie"),
+              renderer:"svg",loop:true,autoplay:true,
+              path:"https://lottie.host/2e7b308e-92b6-495c-a96b-cf93e02eb7b4/BiwZQ7vQaf.json"
+            });
+          }
+        });
+      }
+    });
 
     document.getElementById("closeModal").onclick = () => {
       document.getElementById("modal").style.display="none";
@@ -248,13 +252,9 @@
     gifts.forEach(g => {
       const slide = document.createElement("div");
       slide.className = "embla__slide";
-      if (g.endsWith(".png")||g.endsWith(".jpg")||g.startsWith("http")) {
-        const img = document.createElement("img");
-        img.src = g; slide.appendChild(img);
-      } else {
-        slide.textContent = g;
-        slide.style.fontSize = "36px";
-      }
+      const img = document.createElement("img");
+      img.src = g;
+      slide.appendChild(img);
       emblaTrack.appendChild(slide);
     });
 
