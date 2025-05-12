@@ -7,6 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+  <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
   <style>
     body {
       margin: 0;
@@ -15,17 +16,15 @@
       font-family: Arial, sans-serif;
       text-align: center;
     }
-
     .container {
       max-width: 600px;
       margin: auto;
       padding: 20px;
     }
-
     .news-banner {
       height: 50px;
       width: 100%;
-      background: linear-gradient(to right, #80d5ff, #ffffff, #80d5ff);
+      background: linear-gradient(to right, #80d5ff, #79b1ff, #80d5ff);
       color: #ffffff;
       font-weight: bold;
       display: flex;
@@ -35,30 +34,26 @@
       cursor: pointer;
       margin-bottom: 20px;
     }
-
     .reel {
       position: relative;
       width: 100%;
       height: 130px;
       overflow: hidden;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255,255,255,0.06);
       backdrop-filter: blur(6px);
       margin-bottom: 25px;
     }
-
     .gifts-wrapper {
       display: flex;
       height: 100%;
       align-items: center;
-      padding: 0;
       will-change: transform;
     }
-
     .gift {
       width: 100px;
       height: 100px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255,255,255,0.08);
       border-radius: 15px;
       display: flex;
       justify-content: center;
@@ -66,45 +61,37 @@
       flex-shrink: 0;
       margin: 0 10px;
     }
-
     .gift img {
       max-width: 90px;
       max-height: 90px;
     }
-
     .pointer-line {
       position: absolute;
-      top: 0;
-      left: 50%;
-      width: 4px;
-      height: 100%;
-      background: rgba(0, 200, 255, 0.5);
+      top: 0; left: 50%;
+      width: 4px; height: 100%;
+      background: rgba(0,200,255,0.5);
       transform: translateX(-50%);
       z-index: 10;
     }
-
     button {
-      background-color: #2ea1f8;
-      border: none;
-      color: white;
-      padding: 12px 24px;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #1e81ce;
-    }
-
+        background-color: #2ea1f8;
+        border: none;
+        color: white;
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold; /* Жирный текст */
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%; /* Задаём ширину 100% от родительского контейнера */
+        box-sizing: border-box; /* Учитываем паддинги в общей ширине */
+      }
+      
+    button:hover { background-color: #1e81ce; }
     .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.61);
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.61);
       backdrop-filter: blur(20px);
       display: none;
       align-items: center;
@@ -112,71 +99,36 @@
       z-index: 9999;
       flex-direction: column;
     }
-
-    .modal-animation {
-      width: 180px;
-      height: 180px;
-      margin-bottom: 20px;
-    }
-
-    .modal h2 {
-      font-size: 24px;
-      color: #00ffcc;
-      margin: 0;
-    }
-
-    .modal button {
-      font-size: 16px;
-      margin-top: 30px;
-      padding: 10px 26px;
-    }
-
-    .swipe-roulette-container {
-      margin-top: 30px;
-      text-align: center;
-      position: relative;
-      z-index: 0;
-    }
-
-    .swipe-roulette {
-      position: relative;
-      display: flex;
-      justify-content: start;
-      align-items: center;
-      width: 100%;
-      height: 80px;
-      overflow: hidden;
-      margin: 20px 0;
-    }
-
-    .swipe-gifts-wrapper {
-      display: flex;
-      height: 100%;
-      will-change: transform;
-    }
-
-    .swipe-gift {
-      width: 70px;
-      height: 70px;
-      margin-right: 10px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .swipe-gift img {
-      max-width: 60px;
-      max-height: 60px;
-    }
-
+    .modal-image {
+        max-width: 90%; /* Ограничиваем максимальную ширину */
+        max-height: 60%; /* Ограничиваем максимальную высоту */
+        object-fit: contain; /* Сохраняем пропорции */
+        margin-top: -20px; /* Чуть выше центра */
+        margin-bottom: 15px;
+      }            
+    .modal h2 { font-size: 24px; color: #00ffcc; margin: 0; }
+    .modal button { font-size: 16px; margin-top: 30px; padding: 10px 26px; }
+    /* Embla Carousel */
+    .swipe-roulette-container { margin-top: 30px; text-align: center; }
     .swipe-text {
-      color: #80d5ff;
-      font-size: 18px;
-      margin-bottom: 10px;
+        color: #ffffff;
+        font-size: 17px;
+        margin-bottom: 10px;
+        text-align: left;
+        padding-left: 10px;
+        font-weight: bold;
+      }      
+    .embla { overflow: hidden; width: 100%; }
+    .embla__container { display: flex; }
+    .embla__slide {
+      flex: 0 0 auto;
+      width: 70px; height: 70px;
+      margin-right: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
     }
+    .embla__slide img { max-width: 60px; max-height: 60px; }
   </style>
 </head>
 <body>
@@ -187,123 +139,97 @@
       <div class="pointer-line"></div>
       <div class="gifts-wrapper" id="giftsTrack"></div>
     </div>
-
-    <button id="spinButton">Испытать удачу</button>
+    <button id="spinButton">Try your luck</button>
 
     <div class="swipe-roulette-container">
       <div class="swipe-text">What can I drop?</div>
-      <div class="swipe-roulette">
-        <div class="swipe-gifts-wrapper" id="swipeGiftsTrack"></div>
+      <div class="embla" id="embla">
+        <div class="embla__container" id="emblaTrack"></div>
       </div>
     </div>
   </div>
 
   <div class="modal" id="modal">
+    <img id="modalImage" class="modal-image" src="" alt="Prize image" style="display: none;">
     <div class="modal-animation" id="modalLottie"></div>
     <h2>Try your luck next time 🍀</h2>
     <button id="closeModal">Закрыть</button>
   </div>
+   
 
   <script>
-    const giftWidth = 120;
+    const modalImage = document.getElementById("modalImage");
+modalImage.src = "nothing_drop.png"; // Вставь свою ссылку
+modalImage.style.display = "block";
+
+    // Данные подарков
     const gifts = [
-      "photo_1.png", "photo_2.png", "photo_3.png", "photo_4.png",
-      "photo_5.png", "https://em-content.zobj.net/thumbs/240/apple/354/cherry-blossom_1f338.png",
-      "😢", "img/gift8.jpg", "img/gift9.jpg", "free-icon-verify-9918694.png"
+      "1CHzB4K5FantEZu.png","680e5d8f8bf66.png","toTNAm2yurDAiqK.png","U8z9ivaScNyJ86V.png",
+      "Oj0IhQW5D5QyVFf.png","PQM9MVSTAF7sQ12.png",
+      "nothing_drop.png","pudbsohqxfD98gc.png","bvK9PmcyFgAh4gP.png","q2c0eUx5k8krA97.png"
     ];
 
+    // Рендер основной рулетки
     const giftsTrack = document.getElementById("giftsTrack");
-    const swipeGiftsTrack = document.getElementById("swipeGiftsTrack");
-    const spinButton = document.getElementById("spinButton");
-    const modal = document.getElementById("modal");
-    const modalLottie = document.getElementById("modalLottie");
-    const closeModal = document.getElementById("closeModal");
-
     const fullGifts = [];
-    for (let i = 0; i < 10; i++) {
-      fullGifts.push(...gifts);
-    }
-
-    fullGifts.forEach(gift => {
-      const div = document.createElement("div");
+    for (let i = 0; i < 10; i++) fullGifts.push(...gifts);
+    fullGifts.forEach(g => {
+      const div = document.createElement("div"), img = document.createElement("img");
       div.className = "gift";
-      const img = document.createElement("img");
-      if (gift.startsWith("http") || gift.endsWith(".png") || gift.endsWith(".jpg")) {
-        img.src = gift;
-      } else {
-        img.src = "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png";
-      }
+      img.src = (g.endsWith(".png")||g.endsWith(".jpg")||g.startsWith("http")) ? g
+             : "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png";
       div.appendChild(img);
       giftsTrack.appendChild(div);
     });
 
-    gifts.forEach(gift => {
-      const div = document.createElement("div");
-      div.className = "swipe-gift";
-      const img = document.createElement("img");
-      if (gift.startsWith("http") || gift.endsWith(".png") || gift.endsWith(".jpg")) {
-        img.src = gift;
-      } else {
-        img.src = "https://em-content.zobj.net/thumbs/240/apple/354/crying-face_1f622.png";
-      }
-      div.appendChild(img);
-      swipeGiftsTrack.appendChild(div);
-    });
-
+    // Спин
     let spinning = false;
-
-    spinButton.addEventListener("click", () => {
-      if (spinning) return;
-      spinning = true;
-
-      const prize = "😢";
-      const prizeIndexes = fullGifts
-        .map((g, i) => (g === prize ? i : -1))
-        .filter(i => i !== -1);
-
-      const loopCount = 5;
-      const chosenIndex = prizeIndexes[0] + loopCount * gifts.length;
-
-      const centerOffset = document.getElementById("reel").offsetWidth / 2 - giftWidth / 2;
-      const finalOffset = chosenIndex * giftWidth - centerOffset;
-
+    document.getElementById("spinButton").onclick = () => {
+      if (spinning) return; spinning = true;
+      const prize = "nothing_drop.png";
+      const idx = fullGifts.map((v,i)=>v===prize?i:-1).filter(i=>i!==-1)[0] + 5*gifts.length;
+      const offset = idx*120 - (document.getElementById("reel").offsetWidth/2 - 60);
       gsap.to(giftsTrack, {
-        x: -finalOffset,
+        x: -offset,
         duration: 6,
         ease: "power5.inOut",
-        onComplete: () => {
-          modal.style.display = "flex";
-          modalLottie.innerHTML = "";
+        onComplete(){
+          document.getElementById("modal").style.display="flex";
+          document.getElementById("modalLottie").innerHTML="";
           lottie.loadAnimation({
-            container: modalLottie,
-            renderer: "svg",
-            loop: true,
-            autoplay: true,
-            path: "https://lottie.host/2e7b308e-92b6-495c-a96b-cf93e02eb7b4/BiwZQ7vQaf.json"
+            container:document.getElementById("modalLottie"),
+            renderer:"svg",loop:true,autoplay:true,
+            path:"https://lottie.host/2e7b308e-92b6-495c-a96b-cf93e02eb7b4/BiwZQ7vQaf.json"
           });
         }
       });
+    };
+    document.getElementById("closeModal").onclick = () => {
+      document.getElementById("modal").style.display="none";
+      gsap.set(giftsTrack,{x:0});
+      spinning=false;
+    };
+
+    // Рендер Embla
+    const emblaTrack = document.getElementById("emblaTrack");
+    gifts.forEach(g => {
+      const slide = document.createElement("div");
+      slide.className = "embla__slide";
+      if (g.endsWith(".png")||g.endsWith(".jpg")||g.startsWith("http")) {
+        const img = document.createElement("img");
+        img.src = g; slide.appendChild(img);
+      } else {
+        slide.textContent = g;
+        slide.style.fontSize = "36px";
+      }
+      emblaTrack.appendChild(slide);
     });
 
-    closeModal.addEventListener("click", () => {
-      modal.style.display = "none";
-      gsap.set(giftsTrack, { x: 0 });
-      spinning = false;
-    });
-
-    // GSAP Draggable для swipe-roulette
-    gsap.registerPlugin(Draggable);
-
-    const container = document.querySelector(".swipe-roulette");
-    const maxX = -(swipeGiftsTrack.scrollWidth - container.clientWidth);
-
-    Draggable.create(swipeGiftsTrack, {
-      type: "x",
-      bounds: { minX: maxX, maxX: 0 },
-      inertia: true,
-      edgeResistance: 0.4,
-      throwResistance: 5,
-      zIndexBoost: false
+    // Инициализация Embla
+    EmblaCarousel(document.getElementById("embla"), {
+      loop: false,
+      align: "start",
+      dragFree: true
     });
   </script>
 </body>
