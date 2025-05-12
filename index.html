@@ -11,20 +11,28 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     html, body {
-      margin: 0;
-      background: #0d1117;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      min-height: 110vh;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
+        margin: 0;
+        background: #0d1117;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
-
-    .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
+      
+      .container {
+        flex: 1; /* <-- заставляет контейнер занимать всё доступное пространство */
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+    }
+      
+      .footer-text {
+        font-size: 12px;
+        color: #888;
+        text-align: center;
+        margin-bottom: 10px;
     }
 
     .news-banner {
@@ -90,7 +98,7 @@
       border: none;
       color: white;
       padding: 12px 24px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
       border-radius: 8px;
       cursor: pointer;
@@ -136,14 +144,14 @@
     }
 
     .swipe-roulette-container {
-      margin-top: 30px;
+      margin-top: 35px;
       text-align: center;
     }
 
     .swipe-text {
       color: #ffffff;
       font-size: 17px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       text-align: left;
       padding-left: 10px;
       font-weight: bold;
@@ -172,12 +180,12 @@
 </head>
 <body>
   <div class="container">
-    <div class="news-banner" onclick="window.location.href='https://your-link.com'">Check our news!</div>
+    <div class="news-banner" onclick="window.location.href='https://t.me/voco_in'">Check our news!</div>
     <div class="reel" id="reel">
       <div class="pointer-line"></div>
       <div class="gifts-wrapper" id="giftsTrack"></div>
     </div>
-    <button id="spinButton">Try your luck (35 ⭐)</button>
+    <button id="spinButton">Try your luck  35★</button>
     <div class="swipe-roulette-container">
       <div class="swipe-text">What can I drop?</div>
       <div class="embla" id="embla">
@@ -191,6 +199,7 @@
     <h2>Try your luck next time 🍀</h2>
     <button id="closeModal">Закрыть</button>
   </div>
+  <footer class="footer-text">© 2025 All rights reserved</footer>  
   <script>
     const modalImage = document.getElementById("modalImage");
     modalImage.src = "nothing_drop.png";
@@ -216,7 +225,7 @@
     let spinning = false;
     document.getElementById("spinButton").onclick = () => {
       if (spinning) return;
-      Telegram.WebApp.openInvoice("https://t.me/$SnzxmDaFEUnJEwAArP6lPKsu2j8");
+      Telegram.WebApp.openInvoice("https://t.me/$xxtNG6rZ-UjCDgAA8lgFbgivGRk");
     };
 
     Telegram.WebApp.onEvent("invoiceClosed", function(event) {
@@ -266,5 +275,6 @@
   </script>
 </body>
 </html>
+
 
 
