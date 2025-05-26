@@ -2,30 +2,85 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Рулетка подарков</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Рулетка и вкладки</title>
+
+  <!-- Подключаемые скрипты -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
   <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Стили -->
   <style>
-    html, body {
+    body {
+      overflow-y: auto;
       margin: 0;
-      background: #0d1117;
+      padding: 0;
+      background-color: #0d1117;
       color: white;
       font-family: Arial, sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
     }
 
+    .tab-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      padding: 7px;
+      background-color: #222;
+      border-top: 2px solid #444;
+      z-index: 1000;
+    }
+
+    .tab {
+      width: 40px;
+      height: 40px;
+      margin: 0 15px;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 5px;
+    }
+
+    .tab:hover {
+      background-color: #555;
+    }
+
+    .tab.active {
+      background-color: #95cdff1e;
+      transform: scale(1.01);
+    }
+
+    .tab img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .tab-content {
+      display: none;
+      padding-bottom: 80px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Стили для рулетки */
     .top-bar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       background: #161b22;
-      padding: 8px 15px;
+      padding: 6px 15px;
       display: flex;
       align-items: center;
       z-index: 1000;
@@ -62,12 +117,8 @@
       padding: 0 16px;
       font-weight: 600;
       font-size: 16px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       box-sizing: border-box;
-    }
-
-    .news-banner span {
-      color: rgb(255, 255, 255);
     }
 
     .news-banner button {
@@ -79,7 +130,48 @@
       font-weight: 600;
       cursor: pointer;
     }
-
+  
+    .mode-selector {
+      display: flex;
+      justify-content: center;
+      background: #1c1c1e;
+      border-radius: 16px;
+      padding: 4px;
+      margin-bottom: 12px;
+      gap: 4px;
+    }
+    
+    .mode-option {
+      flex: 1;
+      padding: 8px 0;
+      text-align: center;
+      border-radius: 12px;
+      color: white;
+      font-weight: 650; /* или font-weight: bold; */
+      font-size: 15px;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      background: transparent;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    
+    .mode-option:active {
+      transform: none;
+      background: transparent;
+    }
+    
+    .mode-option:focus {
+      outline: none;
+    }
+    
+    .mode-option.active {
+      background: #2c2c2e;
+    }
+    
+  
+    
+    
     .reel {
       position: relative;
       width: 100%;
@@ -88,7 +180,7 @@
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
       backdrop-filter: blur(6px);
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .gifts-wrapper {
@@ -117,8 +209,10 @@
 
     .pointer-line {
       position: absolute;
-      top: 0; left: 50%;
-      width: 4px; height: 100%;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
       background: rgba(0,200,255,0.5);
       transform: translateX(-50%);
       z-index: 10;
@@ -138,7 +232,8 @@
     }
 
     .modal {
-      position: fixed; top: 0; left: 0;
+      position: fixed;
+      top: 0; left: 0;
       width: 100vw; height: 100vh;
       background: rgba(0, 0, 0, 0.908);
       backdrop-filter: blur(45px);
@@ -170,26 +265,26 @@
       width: 90%;
     }
 
-    .swipe-roulette-container {
-      text-align: center;
-    }
-
     .swipe-text {
-      color: #ffffff;
       font-size: 17px;
       margin-bottom: 12px;
-      text-align: left;
       padding-left: 10px;
       font-weight: bold;
     }
 
-    .embla { overflow: hidden; width: 100%; }
+    .embla {
+      overflow: hidden;
+      width: 100%;
+    }
 
-    .embla__container { display: flex; }
+    .embla__container {
+      display: flex;
+    }
 
     .embla__slide {
       flex: 0 0 auto;
-      width: 70px; height: 70px;
+      width: 70px;
+      height: 70px;
       margin-right: 10px;
       background: rgba(255,255,255,0.08);
       border-radius: 10px;
@@ -207,11 +302,14 @@
       font-size: 12px;
       color: #888;
       text-align: center;
-      margin: 20px 0 10px;
+      margin: 5% 0 10px;
     }
   </style>
 </head>
 <body>
+
+  <!-- Вкладка 1 — Рулетка -->
+<div class="tab-content active" id="tab1">
   <div class="top-bar">
     <img id="profilePic" src="" alt="Profile Picture">
     <span id="profileName">User</span>
@@ -223,12 +321,18 @@
       <button onclick="window.location.href='https://t.me/voco_in'">Open @voco_in</button>
     </div>
 
+    <div class="mode-selector">
+      <div class="mode-option active" data-price="35" data-link="https://t.me/$C4EWW1o_qElQEQAAFie2NIOItOo">35★</div>
+      <div class="mode-option" data-price="50" data-link="https://t.me/$5MR4Glo_qEniEQAADWx3vXO8iKY">50★</div>
+      <div class="mode-option" data-price="150" data-link="https://t.me/$3GIyaVo_qEnjEQAATN9bFV6JHZQ">150★</div>
+    </div>
+
     <div class="reel" id="reel">
       <div class="pointer-line"></div>
       <div class="gifts-wrapper" id="giftsTrack"></div>
     </div>
 
-    <button id="spinButton">Try your luck  35★</button>
+    <button id="spinButton">Try your luck 35★</button>
 
     <div class="swipe-roulette-container">
       <div class="swipe-text">What can I drop?</div>
@@ -239,100 +343,144 @@
   </div>
 
   <div class="modal" id="modal">
-    <img id="modalImage" class="modal-image" src="" alt="Prize image" style="display: none;">
+    <img id="modalImage" class="modal-image" src="nothing_drop.png" alt="Prize image" style="display: none;">
     <div class="modal-animation" id="modalLottie"></div>
     <h2>Try your luck next time 🍀</h2>
     <button id="closeModal">Закрыть</button>
   </div>
 
   <footer class="footer-text">© 2025 All rights reserved</footer>
+</div>
 
-  <script>
-    function updateProfile() {
-      if (window.Telegram && Telegram.WebApp) {
-        let user = Telegram.WebApp.initDataUnsafe?.user;
-        if (user) {
-          document.getElementById("profileName").textContent = user.first_name || "User";
-          if (user.photo_url) {
-            document.getElementById("profilePic").src = user.photo_url;
-          }
+<!-- Вкладка 2 -->
+<div class="tab-content" id="tab2">
+  <div style="padding: 40px 20px;">Контент для второй вкладки</div>
+</div>
+
+<!-- Переключатель вкладок -->
+<div class="tab-container">
+  <div class="tab" onclick="changeTab(1)">
+    <img src="3664550.png" alt="Tab 1" />
+  </div>
+  <div class="tab">
+    <img src="Монета.png" alt="Tab 2" />
+  </div>
+</div>
+
+<!-- Скрипты -->
+<script>
+  function changeTab(tabNumber) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.getElementById('tab' + tabNumber).classList.add('active');
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab')[tabNumber - 1].classList.add('active');
+  }
+
+  function updateProfile() {
+    if (window.Telegram && Telegram.WebApp) {
+      let user = Telegram.WebApp.initDataUnsafe?.user;
+      if (user) {
+        document.getElementById("profileName").textContent = user.first_name || "User";
+        if (user.photo_url) {
+          document.getElementById("profilePic").src = user.photo_url;
         }
       }
     }
+  }
 
-    updateProfile();
+  updateProfile();
 
-    const modalImage = document.getElementById("modalImage");
-    modalImage.src = "nothing_drop.png";
-    modalImage.style.display = "block";
+  const modalImage = document.getElementById("modalImage");
+  modalImage.src = "nothing_drop.png";
+  modalImage.style.display = "block";
 
-    const gifts = [
-      "1CHzB4K5FantEZu.png","680e5d8f8bf66.png","toTNAm2yurDAiqK.png","U8z9ivaScNyJ86V.png",
-      "Oj0IhQW5D5QyVFf.png","PQM9MVSTAF7sQ12.png",
-      "nothing_drop.png","pudbsohqxfD98gc.png","bvK9PmcyFgAh4gP.png","q2c0eUx5k8krA97.png"
-    ];
+  const gifts = [
+    "1CHzB4K5FantEZu.png","680e5d8f8bf66.png","toTNAm2yurDAiqK.png","U8z9ivaScNyJ86V.png",
+    "Oj0IhQW5D5QyVFf.png","PQM9MVSTAF7sQ12.png",
+    "nothing_drop.png","pudbsohqxfD98gc.png","bvK9PmcyFgAh4gP.png","q2c0eUx5k8krA97.png"
+  ];
 
-    const giftsTrack = document.getElementById("giftsTrack");
-    const fullGifts = [];
-    for (let i = 0; i < 10; i++) fullGifts.push(...gifts);
-    fullGifts.forEach(g => {
-      const div = document.createElement("div"), img = document.createElement("img");
-      div.className = "gift";
-      img.src = g;
-      div.appendChild(img);
-      giftsTrack.appendChild(div);
+  const giftsTrack = document.getElementById("giftsTrack");
+  const fullGifts = [];
+  for (let i = 0; i < 10; i++) fullGifts.push(...gifts);
+  fullGifts.forEach(g => {
+    const div = document.createElement("div"), img = document.createElement("img");
+    div.className = "gift";
+    img.src = g;
+    div.appendChild(img);
+    giftsTrack.appendChild(div);
+  });
+
+  let spinning = false;
+  const spinButton = document.getElementById("spinButton");
+  const options = document.querySelectorAll('.mode-option');
+  let selectedLink = "https://t.me/$C4EWW1o_qElQEQAAFie2NIOItOo";
+
+  options.forEach(option => {
+    option.addEventListener('click', () => {
+      options.forEach(o => o.classList.remove('active'));
+      option.classList.add('active');
+
+      const price = option.getAttribute('data-price');
+      selectedLink = option.getAttribute('data-link');
+      spinButton.textContent = `Try your luck ${price}★`;
     });
+  });
 
-    let spinning = false;
-    document.getElementById("spinButton").onclick = () => {
-      if (spinning) return;
-      Telegram.WebApp.openInvoice("https://t.me/$xeWYxwulIUm8DwAAP6FuOsqfMjc");
-    };
+  spinButton.onclick = () => {
+    if (spinning) return;
+    Telegram.WebApp.openInvoice(selectedLink);
+  };
 
-    Telegram.WebApp.onEvent("invoiceClosed", function(event) {
-      if (event.status === "paid") {
-        spinning = true;
-        const prize = "nothing_drop.png";
-        const idx = fullGifts.map((v,i)=>v===prize?i:-1).filter(i=>i!==-1)[0] + 5*gifts.length;
-        const offset = idx*120 - (document.getElementById("reel").offsetWidth/2 - 60);
-        gsap.to(giftsTrack, {
-          x: -offset,
-          duration: 6,
-          ease: "power5.inOut",
-          onComplete(){
-            document.getElementById("modal").style.display="flex";
-            document.getElementById("modalLottie").innerHTML="";
-            lottie.loadAnimation({
-              container:document.getElementById("modalLottie"),
-              renderer:"svg",loop:true,autoplay:true,
-              path:"https://lottie.host/2e7b308e-92b6-495c-a96b-cf93e02eb7b4/BiwZQ7vQaf.json"
-            });
-          }
-        });
-      }
-    });
+  Telegram.WebApp.onEvent("invoiceClosed", function(event) {
+    if (event.status === "paid") {
+      spinning = true;
+      const prize = "nothing_drop.png";
+      const idx = fullGifts.map((v,i)=>v===prize?i:-1).filter(i=>i!==-1)[0] + 5*gifts.length;
+      const offset = idx*120 - (document.getElementById("reel").offsetWidth/2 - 60);
+      gsap.to(giftsTrack, {
+        x: -offset,
+        duration: 6,
+        ease: "power5.inOut",
+        onComplete(){
+          document.getElementById("modal").style.display="flex";
+          document.getElementById("modalLottie").innerHTML="";
+          lottie.loadAnimation({
+            container:document.getElementById("modalLottie"),
+            renderer:"svg",loop:true,autoplay:true,
+            path:"https://lottie.host/2e7b308e-92b6-495c-a96b-cf93e02eb7b4/BiwZQ7vQaf.json"
+          });
+        }
+      });
+    }
+  });
 
-    document.getElementById("closeModal").onclick = () => {
-      document.getElementById("modal").style.display="none";
-      gsap.set(giftsTrack,{x:0});
-      spinning=false;
-    };
+  document.getElementById("closeModal").onclick = () => {
+    document.getElementById("modal").style.display = "none";
+    gsap.set(giftsTrack, { x: 0 });
+    spinning = false;
+  };
 
-    const emblaTrack = document.getElementById("emblaTrack");
-    gifts.forEach(g => {
-      const slide = document.createElement("div");
-      slide.className = "embla__slide";
-      const img = document.createElement("img");
-      img.src = g;
-      slide.appendChild(img);
-      emblaTrack.appendChild(slide);
-    });
+  const emblaTrack = document.getElementById("emblaTrack");
+  gifts.forEach(g => {
+    const slide = document.createElement("div");
+    slide.className = "embla__slide";
+    const img = document.createElement("img");
+    img.src = g;
+    slide.appendChild(img);
+    emblaTrack.appendChild(slide);
+  });
 
-    EmblaCarousel(document.getElementById("embla"), {
-      loop: false,
-      align: "start",
-      dragFree: true
-    });
-  </script>
+  EmblaCarousel(document.getElementById("embla"), {
+    loop: false,
+    align: "start",
+    dragFree: true
+  });
+
+  updateProfile();
+  changeTab(1);
+</script>
+
+  
 </body>
-</html>
+</html>     
