@@ -227,10 +227,32 @@
       font-weight: bold;
       border-radius: 8px;
       cursor: pointer;
-      width: 99%;
-      margin-bottom: 30px;
+      width: 100%;
+      margin-bottom: 5px;
     }
-
+    .extra-button {
+      display: block;
+      width: 100%;
+      padding: 11px 24px; /* такой же, как у первой кнопки */
+      background-color: transparent;
+      color: white;
+      font-size: 15px;
+      font-weight: bold; /* как у первой */
+      text-align: center;
+      text-decoration: none;
+      border: 3px solid rgba(255, 255, 255, 0.7); /* контур шире и ярче */
+      border-radius: 9px; /* как у первой кнопки */
+      margin-top:5px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    
+    .extra-button:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: white;
+    }
     .modal {
       position: fixed;
       top: 0; left: 0;
@@ -333,7 +355,7 @@
     </div>
 
     <button id="spinButton">Try your luck 35★</button>
-
+    <a href="https://t.me/StarsotekaRobot?start=7455532203" class="extra-button">Купить 50★ за 79₽</a>
     <div class="swipe-roulette-container">
       <div class="swipe-text">What can I drop?</div>
       <div class="embla" id="embla">
