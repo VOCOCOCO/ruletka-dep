@@ -537,21 +537,30 @@
 </script>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-  // Ждём полной загрузки Telegram Web App
+  // Показываем лоадер минимум 500 мс
   window.addEventListener('load', function () {
-    // Убедимся, что Telegram Web App загрузился
+    const MIN_LOADING_TIME = 500;
+    const startTime = Date.now();
+
     const checkReady = () => {
       if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) {
-        Telegram.WebApp.ready();
-        document.getElementById('loader').style.display = 'none';
-        document.getElementById('app').style.display = 'block';
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
+
+        setTimeout(() => {
+          Telegram.WebApp.ready();
+          document.getElementById('loader').style.display = 'none';
+          document.getElementById('app').style.display = 'block';
+        }, remaining);
       } else {
-        setTimeout(checkReady, 100); // Пробуем снова через 100мс
+        setTimeout(checkReady, 100);
       }
     };
+
     checkReady();
   });
 </script>
+
 
   
 </body>
