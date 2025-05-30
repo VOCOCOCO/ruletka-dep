@@ -614,14 +614,12 @@
 </script>
 
 <script>
-    Scrollbar.init(document.querySelector('#my-scrollbar'), {
-      damping: 0.07,
-      alwaysShowTracks: true
+    document.addEventListener("DOMContentLoaded", function () {
+      Scrollbar.init(document.querySelector('#my-scrollbar'), {
+        damping: 0.07,
+        alwaysShowTracks: true
+      });
     });
-  });
-</script>
-
-
-  
+  </script>
 </body>
 </html>     
