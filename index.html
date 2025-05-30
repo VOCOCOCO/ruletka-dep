@@ -15,13 +15,38 @@
   <!-- Стили -->
   <style>
     body {
-      overflow-y: auto;
-      margin: 0;
-      padding: 0;
-      background-color: #0d1117;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  background-color: #0d1117;
+  color: white;
+  font-family: Arial, sans-serif;
+
+  /* Для плавной инерции на мобильных */
+  -webkit-overflow-scrolling: touch;
+
+  /* Плавный скролл везде */
+  scroll-behavior: smooth;
+}
+
+/* Кастомизация скроллбара (для десктопа, если нужно) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
 
       #loader {
         position: fixed;
