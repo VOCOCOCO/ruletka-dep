@@ -377,13 +377,39 @@
       text-align: center;
       margin: 5% 0 10px;
     }
+
+    #marketModal h2 {
+  color: white;
+  margin-bottom: 12px;
+}
+
+#marketModal p {
+  color: #ccc;
+  margin-bottom: 25px;
+}
+
+#marketModal button {
+  background-color: #2ea1f8;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
   </style>
 </head>
 <body>
   <div id="loader">
     <div class="spinner"></div>
   </div>
-  
+  <div class="modal" id="marketModal" style="display: flex;">
+  <h2>To continue, open the Market</h2>
+  <p style="max-width: 90%; text-align: center; font-size: 15px;">To use this feature, you need to visit the Market at least once during this session.</p>
+  <button onclick="goToMarket()">Go to Market</button>
+</div>
   <div id="app">
     <!-- Вкладка 1 — Рулетка -->
 <div class="tab-content active" id="tab1">
@@ -399,9 +425,9 @@
     </div>
 
     <div class="mode-selector">
-      <div class="mode-option active" data-price="35" data-link="https://t.me/$C4EWW1o_qElQEQAAFie2NIOItOo">35★</div>
-      <div class="mode-option" data-price="50" data-link="https://t.me/$5MR4Glo_qEniEQAADWx3vXO8iKY">50★</div>
-      <div class="mode-option" data-price="150" data-link="https://t.me/$3GIyaVo_qEnjEQAATN9bFV6JHZQ">150★</div>
+      <div class="mode-option active" data-price="35" data-link="https://t.me/$zLCg1Xa26UlZDQAA5UvFqNpOjqo">35★</div>
+      <div class="mode-option" data-price="50" data-link="https://t.me/$6k1Z8Ha26UlaDQAAVovivYcjdqU">50★</div>
+      <div class="mode-option" data-price="150" data-link="https://t.me/$SR_sP3a26UlbDQAAvm5lKSwJrGg">150★</div>
     </div>
 
     <div class="reel" id="reel">
@@ -503,7 +529,7 @@
   // --- Режимы ---
   const spinButton = document.getElementById("spinButton");
   const options = document.querySelectorAll('.mode-option');
-  let selectedLink = "https://t.me/$C4EWW1o_qElQEQAAFie2NIOItOo";
+  let selectedLink = "https://t.me/$zLCg1Xa26UlZDQAA5UvFqNpOjqo";
 
   options.forEach(option => {
     option.addEventListener('click', () => {
@@ -594,6 +620,17 @@
 
     checkReady();
   });
+
+  function goToMarket() {
+  document.getElementById("marketModal").style.display = "none";
+  window.location.href = "https://t.me/portals/market?startapp=wfu2s0"; // <-- замени на нужный Market
+}
+
+// Показываем модальное окно сразу при запуске
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("marketModal").style.display = "flex";
+});
+
 
   // --- Инициализация ---
   updateProfile();
