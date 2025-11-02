@@ -120,7 +120,7 @@ body{
 .reel{ position:relative; width:100%; height:130px; overflow:hidden; border-radius:12px; background:rgba(255,255,255,.06); backdrop-filter:blur(6px); margin-bottom:12px; }
 .gifts-wrapper{ display:flex; height:100%; align-items:center; will-change:transform; }
 .gift{ width:100px; height:100px; background:rgba(255,255,255,.08); border-radius:15px; display:flex; justify-content:center; align-items:center; flex-shrink:0; margin:0 10px; }
-.gift img{ max-width:90px; max-height:90px; }
+.gift img{ max-width:90px; max-height:90px;border-radius: 14px; /* 🔹 закругление углов */ }
 .pointer-line{ position:absolute; top:0; left:50%; width:4px; height:100%; background:rgba(0,200,255,.5); transform:translateX(-50%); z-index:10; }
 
 /* Buttons */
@@ -166,8 +166,19 @@ body{
 .tasks-hero{
   width:100%; aspect-ratio: 16/7; border-radius:18px; overflow:hidden; background:#123; display:grid; place-items:center; margin-bottom:12px; }
 .tasks-hero img{ width:100%; height:100%; object-fit:cover; }
+
 .tasks-list{ display:flex; flex-direction:column; gap:10px; }
-.task-item{ background:#121722; border:1px solid #1f2633; border-radius:14px; padding:12px 14px; display:flex; gap:12px; align-items:center; }
+.task-item {
+  background: #121722;
+  border: 1px solid #1f2633;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px; /* 🔹 Отступ между блоками */
+}
+
 .task-logo{ width:38px; height:38px; border-radius:10px; background:#1b202c; display:grid; place-items:center; font-size:20px; }
 .task-main{ display:flex; flex-direction:column; gap:4px; flex:1; min-width:0; }
 .task-title{ font-weight:800; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -181,6 +192,43 @@ body{
 .big-avatar{ width:96px; height:96px; border-radius:50%; background:#222 center/cover; border:3px solid #303544; }
 .inv-name{ font-weight:900; font-size:20px; }
 .inv-empty{ text-align:center; color:#8d95a8; padding:18px 6px; }
+
+.swipe-text {
+  font-size: 17px;
+  margin-top: 12px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+.embla {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 auto;
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.embla__slide img {
+  max-width: 60px;
+  max-height: 60px;
+  border-radius: 8px; /* 🔹 закругление углов */
+}
+
+
 </style>
 </head>
 <body>
@@ -217,9 +265,9 @@ body{
     </div>
 
     <div class="mode" id="modeWrap">
-      <div class="opt active" data-price="35" data-link="https://t.me/$zLCg1Xa26UlZDQAA5UvFqNpOjqo">35★</div>
-      <div class="opt" data-price="50" data-link="https://t.me/$6k1Z8Ha26UlaDQAAVovivYcjdqU">50★</div>
-      <div class="opt" data-price="150" data-link="https://t.me/$SR_sP3a26UlbDQAAvm5lKSwJrGg">150★</div>
+      <div class="opt active" data-price="35" data-link="https://t.me/$7zWPMAlBQUibEgAAxCURt9XSYc0">45★</div>
+      <div class="opt" data-price="50" data-link="https://t.me/$geukcwlBQUicEgAAi0BsmLkdtjs">99★</div>
+      <div class="opt" data-price="150" data-link="https://t.me/$8_CV8AlBQUieEgAARcGF66pKL3Y">149★</div>
     </div>
 
     <div class="payton-row">
@@ -233,20 +281,23 @@ body{
     </div>
 
     <button id="spinBtn" class="btn-primary">Try your luck 35★</button>
-    <a href="https://t.me/StarsotekaRobot?start=d846ae70" class="btn-outline">Купить 50★ за 79₽</a>
+    <a href="https://t.me/LuxuryStarsBot/app?startapp=R60mNloJ" class="btn-outline">Купить 50+★</a>
 
-    <div style="margin-top:14px;">
-      <div style="font-weight:800; margin:6px 2px 10px;">What can I drop?</div>
-      <div class="embla" id="embla"><div class="embla__container" id="emblaTrack"></div></div>
-    </div>
+    <div class="swipe-roulette-container">
+  <div class="swipe-text">What can I drop?</div>
+  <div class="embla" id="embla">
+    <div class="embla__container" id="emblaTrack"></div>
   </div>
+</div>
+
+  
 </main>
 
 <main id="page2" class="page">
   <div class="container">
     <div class="tasks-hero">
       <!-- Вставь своё изображение, по умолчанию синий баннер -->
-      <img id="tasksHero" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1400&auto=format&fit=crop" alt="Tasks">
+      <img id="tasksHero" src="IMG_3621.JPEG" alt="Tasks">
     </div>
 
     <div style="font-weight:900; font-size:18px; margin:6px 2px 12px;">Tasks:</div>
@@ -316,8 +367,8 @@ body{
 /* ========= SETTINGS ========= */
 const MERCHANT_ADDRESS = 'UQDyKNQLN_PqZgd_NXnVe80cezX9M5mCL0izNW3w2iQAXkp0'; // получатель TON
 const TONCENTER_API    = 'https://toncenter.com/api/v2';
-const TONCENTER_KEY    = '4450d174a1faa93de6c3acbc449cb55e7b60d2c83799111ae9e55ac9ad082152';
-const MANIFEST_URL     = 'https://vocococo.github.io/ton-connect/tonconnect-manifest.json';
+const TONCENTER_KEY    = '01b2fe1b9a8b20aabb513086419b6dc4ca59209e5411d773037ebd356c44c43c';
+const MANIFEST_URL     = 'https://github.com/VOCOCOCO/ManifestDep/blob/main/tonconnect-manifest.json';
 
 /* Цена TON для режимов — по твоему ТЗ (не конвертация!) */
 const TON_PRICE_BY_STARS = { 35: 0.35, 50: 0.65, 150: 1.00 };
@@ -511,9 +562,9 @@ tabs.forEach(t=>t.addEventListener('click', ()=>{
 
 /* ========= REEL DATA ========= */
 const gifts = [
-  "1CHzB4K5FantEZu.png","680e5d8f8bf66.png","toTNAm2yurDAiqK.png","U8z9ivaScNyJ86V.png",
-  "Oj0IhQW5D5QyVFf.png","PQM9MVSTAF7sQ12.png","nothing_drop.png",
-  "pudbsohqxfD98gc.png","bvK9PmcyFgAh4gP.png","q2c0eUx5k8krA97.png"
+  "springbasket-12125.medium.jpg","artisanbrick-5640.medium.jpg","bdaycandle-11298.medium.jpg","berrybox-46461.medium.jpg",
+  "easteregg-140331.medium.jpg","gemsignet-5768.medium.jpg","nothing_drop.png",
+  "lightsword-105121.medium.jpg","lowrider-19031.medium.jpg","genielamp-3195.medium.jpg"
 ];
 const fullGifts=[]; for(let i=0;i<10;i++) fullGifts.push(...gifts);
 const giftsTrack = $('#giftsTrack');
@@ -528,8 +579,8 @@ EmblaCarousel(document.getElementById('embla'),{loop:false,align:"start",dragFre
 const modeWrap = $('#modeWrap');
 const payTonSwitch = $('#payTon');
 const spinBtn = $('#spinBtn');
-let selectedStars = 35;
-let selectedInvoice = "https://t.me/$zLCg1Xa26UlZDQAA5UvFqNpOjqo";
+let selectedStars = 45;
+let selectedInvoice = "https://t.me/$7zWPMAlBQUibEgAAxCURt9XSYc0";
 
 function updateSpinButtonLabel(){
   if(payTonSwitch.classList.contains('on')){
@@ -618,7 +669,7 @@ Telegram.WebApp.onEvent('invoiceClosed', (ev)=>{
 });
 function startSpinFlow(){
   spinning=true;
-  const prize = "nothing_drop.png"; // демо
+  const prize = "IMG_3621.JPEG"; // демо
   const idx = fullGifts.findIndex(v=>v===prize) + 5 * (gifts.length);
   const offset = idx * 120 - (document.getElementById("reel").offsetWidth / 2 - 60);
   gsap.to(giftsTrack,{
@@ -633,9 +684,9 @@ function startSpinFlow(){
 
 /* ========= TASKS ========= */
 const tasks = [
-  { id:'t1', title:'Подпишитесь на канал @portals', url:'https://t.me/portals', reward:'+10% шанс (визуально)' },
-  { id:'t2', title:'Откройте VOCO Gifts', url:'https://t.me/AutoGiftysBot', reward:'+10% шанс (визуально)' },
-  { id:'t3', title:'Посетите наш канал @voco_in', url:'https://t.me/voco_in', reward:'+10% шанс (визуально)' },
+  { id:'t1', title:'Подпишитесь на наш канал', url:'https://t.me/voco_in', reward:'+10% шанс' },
+  { id:'t2', title:'Откройте Маркет', url:'https://t.me/portals/market?startapp=wfu2s0', reward:'+10% шанс' },
+  { id:'t3', title:'Подпишитесь на канал', url:'https://t.me/vo2co', reward:'+10% шанс' },
 ];
 let tasksState = JSON.parse(localStorage.getItem(TASKS_STATE_KEY)||'{}');
 let lastOpenTaskId = null;
