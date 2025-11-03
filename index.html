@@ -80,7 +80,7 @@ body{
 /* Tabs bar bottom */
 .tabbar{
   position:fixed; left:0; right:0; bottom:0; z-index:60;
-  display:flex; justify-content:center; align-items:center; padding:8px 10px;
+  display:flex; justify-content:center; align-items:center; padding:12px 10px;
   background:linear-gradient(0deg,rgba(13,17,23,1),rgba(13,17,23,.96));
   border-top:1px solid rgba(255,255,255,.03);
 }
@@ -265,7 +265,7 @@ body{
     </div>
 
     <div class="mode" id="modeWrap">
-      <div class="opt active" data-price="35" data-link="https://t.me/$7zWPMAlBQUibEgAAxCURt9XSYc0">45★</div>
+      <div class="opt active" data-price="45" data-link="https://t.me/$7zWPMAlBQUibEgAAxCURt9XSYc0">45★</div>
       <div class="opt" data-price="50" data-link="https://t.me/$geukcwlBQUicEgAAi0BsmLkdtjs">99★</div>
       <div class="opt" data-price="150" data-link="https://t.me/$8_CV8AlBQUieEgAARcGF66pKL3Y">149★</div>
     </div>
@@ -280,7 +280,7 @@ body{
       <div class="gifts-wrapper" id="giftsTrack"></div>
     </div>
 
-    <button id="spinBtn" class="btn-primary">Try your luck 35★</button>
+    <button id="spinBtn" class="btn-primary">Try your luck 45★</button>
     <a href="https://t.me/LuxuryStarsBot/app?startapp=R60mNloJ" class="btn-outline">Купить 50+★</a>
 
     <div class="swipe-roulette-container">
@@ -368,10 +368,10 @@ body{
 const MERCHANT_ADDRESS = 'UQDyKNQLN_PqZgd_NXnVe80cezX9M5mCL0izNW3w2iQAXkp0'; // получатель TON
 const TONCENTER_API    = 'https://toncenter.com/api/v2';
 const TONCENTER_KEY    = '01b2fe1b9a8b20aabb513086419b6dc4ca59209e5411d773037ebd356c44c43c';
-const MANIFEST_URL     = 'https://github.com/VOCOCOCO/ruletka-dep/blob/main/tonconnect-manifest.json';
+const MANIFEST_URL     = 'https://vocococo.github.io/ManifestDep/tonconnect-manifest.json';
 
 /* Цена TON для режимов — по твоему ТЗ (не конвертация!) */
-const TON_PRICE_BY_STARS = { 35: 0.35, 50: 0.65, 150: 1.00 };
+const TON_PRICE_BY_STARS = { 45: 0.35, 50: 0.65, 150: 1.00 };
 
 /* LocalStorage keys */
 const APP_BALANCE_KEY  = 'voco_ton_balance_v1';
@@ -563,8 +563,8 @@ tabs.forEach(t=>t.addEventListener('click', ()=>{
 /* ========= REEL DATA ========= */
 const gifts = [
   "springbasket-12125.medium.jpg","artisanbrick-5640.medium.jpg","bdaycandle-11298.medium.jpg","berrybox-46461.medium.jpg",
-  "easteregg-140331.medium.jpg","gemsignet-5768.medium.jpg","nothing_drop.png",
-  "lightsword-105121.medium.jpg","lowrider-19031.medium.jpg","genielamp-3195.medium.jpg"
+  "easteregg-140331.medium.jpg","gemsignet-5768.medium.jpg","genielamp-3195.medium.jpg",
+  "lightsword-105121.medium.jpg","lowrider-19031.medium.jpg","nothing_drop.png"
 ];
 const fullGifts=[]; for(let i=0;i<10;i++) fullGifts.push(...gifts);
 const giftsTrack = $('#giftsTrack');
@@ -687,6 +687,7 @@ const tasks = [
   { id:'t1', title:'Подпишитесь на наш канал', url:'https://t.me/voco_in', reward:'+10% шанс' },
   { id:'t2', title:'Откройте Маркет', url:'https://t.me/portals/market?startapp=wfu2s0', reward:'+10% шанс' },
   { id:'t3', title:'Подпишитесь на канал', url:'https://t.me/vo2co', reward:'+10% шанс' },
+  { id:'t4', title:'Откройте Stars Маркет', url:'https://t.me/LuxuryStarsBot/app?startapp=R60mNloJ', reward:'+10% шанс' },
 ];
 let tasksState = JSON.parse(localStorage.getItem(TASKS_STATE_KEY)||'{}');
 let lastOpenTaskId = null;
@@ -728,4 +729,3 @@ updateSpinButtonLabel();
 </script>
 </body>
 </html>
-
