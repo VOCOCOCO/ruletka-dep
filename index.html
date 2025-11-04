@@ -244,7 +244,7 @@ body{
     <button id="connectBtn" class="connect-btn"><span class="addr">Connect TON</span></button>
 
     <div id="balancePill" class="balance-pill" title="Balance">
-      <img id="tonIcon" class="ton-icon" src="https://raw.githubusercontent.com/ton-blockchain/wallet-assets/master/ton_symbol.png" alt="TON">
+      <img id="tonIcon" class="ton-icon" src="ton.svg" alt="TON">
       <span id="balanceValue" class="balance-val">0.00</span>
       <div id="plusBtn" class="plus-btn" role="button">+</div>
       <svg id="walletCaret" class="wallet-caret" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -260,8 +260,8 @@ body{
 <main id="page1" class="page active">
   <div class="container">
     <div class="banner">
-      <span>Turbo Gifts here!</span>
-      <button class="btn" onclick="openLink('https://t.me/AutoGiftysBot')">Open Gifts</button>
+      <span>Check our news!</span>
+      <button class="btn" onclick="openLink('https://t.me/voco_in')">Open Channel</button>
     </div>
 
     <div class="mode" id="modeWrap">
@@ -504,7 +504,7 @@ depositBtn.addEventListener('click', async ()=>{
   try{
     closeWallet();
     await tonUI.sendTransaction({
-      validUntil: Math.floor(Date.now()/1000) + 300,
+      validUntil: Math.floor(Date.now()/1500) + 300,
       messages: [{ address: MERCHANT_ADDRESS, amount: nanoAmount }]
     });
     writeBalance(readBalance()+amount);
@@ -562,7 +562,7 @@ tabs.forEach(t=>t.addEventListener('click', ()=>{
 
 /* ========= REEL DATA ========= */
 const gifts = [
-  "springbasket-12125.medium.jpg","artisanbrick-5640.medium.jpg","bdaycandle-11298.medium.jpg","berrybox-46461.medium.jpg",
+  "springbasket-12125.medium.jpg","astralshard-1412.medium.jpg","bdaycandle-11298.medium.jpg","berrybox-46461.medium.jpg",
   "easteregg-140331.medium.jpg","gemsignet-5768.medium.jpg","genielamp-3195.medium.jpg",
   "lightsword-105121.medium.jpg","lowrider-19031.medium.jpg","nothing_drop.png"
 ];
